@@ -1,27 +1,12 @@
-﻿// Library module
-angular.module('companyDirectives', []);
+﻿angular.module('catalog', []);
 
-// Directives
-angular.module('companyDirectives').directive('datePicker', [function () {
-	...
-}]);
-
-// Application module
-angular.module('catalog', ['companyDirectives', 'ui.directives', ...]);
-// Configurations
 angular.module('catalog').config(['$routeProvider', function($routeProvider) {
-	...
+	$routeProvider.
+		when('/index', {templateUrl: 'partials/index.html'}).
+		// optional parameter - filter
+		when('/catalog/?:filter', {templateUrl: 'partials/catalog.html', controller: 'CatalogCtrl'}).
+		// required parameter itemId		
+		when('/item/:itemId', {templateUrl: 'partials/item-edit.html', controller: 'ItemEditCtrl'}). 
+		when('/item/view/:itemId', {templateUrl: 'partials/item-detail.html', controller: 'ItemDetailCtrl'}).
+		otherwise({redirectTo: '/index'});
 }]);
-// Services 
-angular.module('catalog').factory( 'myService', [function() {
-	...	
-	return function(item) {
-		...
-	}	
-}]);
-// Controllers
-angular.module('catalog').controller('CatalogCtrl', ['$scope', '$location', '$http', 'myService', function ($scope, $location, $http, myService) {
-	...
-}]);
-// More ...
-

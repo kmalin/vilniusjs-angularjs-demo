@@ -1,4 +1,4 @@
-vilniusjs-angularjs-demo
+ï»¿vilniusjs-angularjs-demo
 ========================
 
 Demo application for AngularJS framework presentation created for Vilnius JS user group meeting. UI in Lithuanian language.
@@ -6,7 +6,7 @@ Demo application for AngularJS framework presentation created for Vilnius JS use
 AngularJs prezentacija
 ======================
 
-1. Paprasèiausias AngularJS puslapis - Sveikas Pasauli!
+1. PaprasÄiausias AngularJS puslapis - Sveikas Pasauli!
 -------------------------------------------------------
 
 ```html
@@ -20,14 +20,14 @@ AngularJs prezentacija
 </html>
 ```
 
-![Automatinis ğablono ir modelio sukûrimas](http://docs.angularjs.org/img/tutorial/tutorial_00.png)
+![Automatinis Å¡ablono ir modelio sukÅ«rimas](http://docs.angularjs.org/img/tutorial/tutorial_00.png)
 
-AngularJS nuskaito html ğablonà ir sukuria kontekstà(angl. scope) su ğablone nurodytais properèiais. Duomenø ávedimo elementams uşdedami ávykiai, kurie automatiğkai keièia kontekstà.
+AngularJS nuskaito html Å¡ablonÄ… ir sukuria kontekstÄ…(angl. scope) su Å¡ablone nurodytais properÄiais. DuomenÅ³ Ä¯vedimo elementams uÅ¾dedami Ä¯vykiai, kurie automatiÅ¡kai keiÄia kontekstÄ….
 
-2. Priklausomybiø áterpimas (Dependency Injection)
+2. PriklausomybiÅ³ Ä¯terpimas (Dependency Injection)
 -------------------------------------------------------
 
-AngularJS iğ pagrindø remiasi priklausomybiø áterpimo principø. Kuriant applikacijà rekomentuojama jà suskaldyti á modulius, kurie turëtø savo konfigûracijas, direktyvas (komponentus), servisus, kontrolerius. 
+AngularJS iÅ¡ pagrindÅ³ remiasi priklausomybiÅ³ Ä¯terpimo principÅ³. Kuriant applikacijÄ… rekomentuojama jÄ… suskaldyti Ä¯ modulius, kurie turÄ—tÅ³ savo konfigÅ«racijas, direktyvas (komponentus), servisus, kontrolerius. 
 
 ```js
 // Library module
@@ -59,4 +59,24 @@ function ($scope, $location, $http, myService) {
 // More ...
 ```
 
-HTML ğablonuose priklausomybës yra automatiğkai áterpiamos, JavaScript kode reikia nurodyti priklausomybës pavadinimà ir aprağyti jà kaip closure funkcijos parametrà.
+HTML Å¡ablonuose priklausomybÄ—s yra automatiÅ¡kai Ä¯terpiamos, JavaScript kode reikia nurodyti priklausomybÄ—s pavadinimÄ… ir apraÅ¡yti jÄ… kaip closure funkcijos parametrÄ….
+
+3. URL keliai (Routes)
+----------------------
+
+AngularJS leidÅ¾ia apraÅ¡yti URL kelius, einanÄius uÅ¾ # simbolio ir taip sukontroliuoja perÄ—jimus iÅ¡ vieno vaizdo Ä¯ kitÄ… vieno puslapio aplikacijoje. Taip pat sukontroliuoja puslapio istorijÄ….
+
+```js
+angular.module('catalog', []);
+
+angular.module('catalog').config(['$routeProvider', function($routeProvider) {
+	$routeProvider.
+		when('/index', {templateUrl: 'partials/index.html'}).
+		// optional parameter - filter
+		when('/catalog/?:filter', {templateUrl: 'partials/catalog.html', controller: 'CatalogCtrl'}).
+		// required parameter itemId		
+		when('/item/:itemId', {templateUrl: 'partials/item-edit.html', controller: 'ItemEditCtrl'}). 
+		when('/item/view/:itemId', {templateUrl: 'partials/item-detail.html', controller: 'ItemDetailCtrl'}).
+		otherwise({redirectTo: '/index'});
+}]);
+```
