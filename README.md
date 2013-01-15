@@ -193,3 +193,31 @@ AngularJS turi daug standartinių servisų:
 * ...
 
 Kaip matome šie servisai užvelka abstrakcijos lygį ant standartinių JavaScript objektų, tam kad juos prireikus būtų galima pakeisti kitais (pvz. testuojant).
+
+8. Filtrai (Filters)
+--------------------
+
+Filtras AngularJS karkase - tai funkcija, kuri keičia išraiškos reikšmę. Filtrai išraiškose prijungiami '|' simboliu. Paprastas pavyzdys - skaičių formatavimas: 
+```html
+{{item.remainder * item.price | number:2}}
+``` 
+Filtrai dažnai naudojami filtruoti masyvams:
+```html
+<tbody ng-repeat="item in pagedItems | expiredFilter | filter:query">
+```
+Kaip matome, galima apjungti keletą filtrų į nuoseklų filtravimą.
+Filtro kodas:
+```js
+angular.module('catalog')
+
+.filter('expiredFilter', ['$routeParams', 'expiredService', function($routeParams, expiredService) {
+    
+	return function(input) {
+		if ($routeParams.filter === 'expired') {
+			return _.filter(input, expiredService);
+		} else {
+			return input;
+		}
+    };
+}]);
+```

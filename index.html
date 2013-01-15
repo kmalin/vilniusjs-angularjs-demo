@@ -70,7 +70,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody ng-repeat="item in pagedItems">
+			<tbody ng-repeat="item in pagedItems | expiredFilter | filter:query">
 				<tr>
 					<td><a href="#item/view/{{item.id}}">{{item.id}}</a></td>
 					<td><a href="#item/view/{{item.id}}">{{item.title}}</a></td>
@@ -144,5 +144,6 @@
 	<script src="js/controllers/catalog-ctrl.js"></script>
 	<script src="js/controllers/item-detail-ctrl.js"></script>
 	<script src="js/controllers/item-edit-ctrl.js"></script>
+	<script src="js/filters/expired-filter.js"></script>
 </body>
 </html>
