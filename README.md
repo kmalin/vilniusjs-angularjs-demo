@@ -80,3 +80,20 @@ angular.module('catalog').config(['$routeProvider', function($routeProvider) {
 		otherwise({redirectTo: '/index'});
 }]);
 ```
+
+4. Šablonai (Templates)
+-----------------------
+
+Leidžiami bent trijų tipų šablonai:
+* HTML elementai pagrindiniame puslapyje
+* Šablonas `<script>` žymėje
+* Šablonas atskirame faile
+
+Pavyzdys:
+```html
+<script type="text/ng-template" id="partials/item-edit.html">
+<form>
+...
+</form>
+</script>
+```

@@ -1,0 +1,145 @@
+﻿<!doctype html>
+<html lang="lt" ng-app="catalog">
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS - Prekių katalogas</title>
+	<link rel="stylesheet" href="inc/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="inc/jquery-ui/smoothness/jquery-ui-1.9.0.custom.min.css">
+</head>
+<body>
+	<div class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<h2><a href="#index">Prekių katalogas</a></h2>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<ul class="nav nav-list">
+					<li class="nav-header">Pagrindinis</li>
+					<li><a href="#index">Pagrindinis</a></li>
+					<li class="nav-header">Katalogas</li>
+					<li><a href="#catalog">Prekių sąrašas</a></li>
+					<li><a href="#item/new">Nauja prekė</a></li>
+				</ul>
+			</div>
+			<div class="span10 main-content">
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/ng-template" id="partials/index.html">
+		<div class="hero-unit">
+		<h1>Prekių katalogas</h1>
+		<p>Sukurtas naudojant <strong>AngularJS</strong> karkasą</p>
+		<p><a class="btn btn-primary btn-large" href="#catalog">Pradėti</a></p>
+		<p>
+			Naudojamos technologijos:
+			<ul class="inline">
+			<li><a href="http://angularjs.org/"><img src="img/angular-logo.png"></img> AngularJS</a></li>
+			<li><a href="http://twitter.github.com/bootstrap/index.html"><img src="img/bootstrap-logo.png"></img> Bootstrap</a></li>
+			<li><a href="http://jqueryui.com/">Jquery UI</a></li>
+			<li><a href="http://jquery.com/">Jquery</a></li>
+			<li><a href="http://underscorejs.org/">Underscore</a></li>
+			</ul>
+		</p>
+		</div>
+	</script>
+	<script type="text/ng-template" id="partials/catalog.html">
+		<h3>Prekių sąrašas</h3>
+		<ul class="left inline">
+			<li>Viso prekių: <a href="#catalog">{{pagedItems.length}}</a></li>
+			<li>Prekių, kurių galiojimo laikas baigėsi: <a href="#catalog/expired">{{expiredCount}}</a></li>
+		</ul>
+		<form class="form-search right">
+			<input type="text" class="input-medium search-query" ng-model="query">
+		</form>
+		<table class="table table-hover table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Pavadinimas</th>
+					<th>Kaina</th>
+					<th>Kiekis</th>
+					<th>Suma</th>
+					<th>Galiojimo data</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="item in pagedItems">
+				<tr>
+					<td><a href="#item/view/{{item.id}}">{{item.id}}</a></td>
+					<td><a href="#item/view/{{item.id}}">{{item.title}}</a></td>
+					<td>{{item.price}} Lt</td>
+					<td>{{item.remainder}} {{item.unit}}</td>
+					<td><span ng-show="item.remainder">{{item.remainder * item.price | number:2}} Lt</span></td>
+					<td ng-class="{expired: isExpired(item)}">{{item.date}}</td>
+					<td><a href="#item/{{item.id}}">Redaguoti</a></td>
+					<td><a ng-click="remove(item)">Ištrinti</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="left"><a href="#item/new" class="btn">Nauja prekė</a></div>
+	</script>
+	<script type="text/ng-template" id="partials/item-edit.html">
+		<form name="form" ng-submit="doneEditing(item)" class="form-horizontal" novalidate>
+			<h3 ng-show="!item.id">Prekės kūrimas</h3>
+			<h3 ng-show="!!item.id">Prekės redagavimas</h3>
+			<div class="control-group">
+				<label class="control-label">Pavadinimas</label>
+				<div class="controls">
+					<input type="text" placeholder="Pavadinimas (iki 50 simb.)" ng-model="item.title" required maxlength="50" minlength="3">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Matavimo vienetai</label>
+				<div class="controls">
+					<input type="text" placeholder="vnt., kg" ng-model="item.unit">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Vieneto kaina</label>
+				<div class="controls">
+					<div class="input-append">
+						<input type="number" placeholder="Kaina litais" ng-model="item.price" required number min="0" max="1000000">
+						<span class="add-on">Lt</span>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Likutis</label>
+				<div class="controls">
+					<div class="input-append">
+						<input type="number" placeholder="Likutis kiekio vienetais" ng-model="item.remainder" number min="0" max="1000000">
+						<span class="add-on">{{item.unit}}</span>
+					</div>
+					
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Galiojimo data</label>
+				<div class="controls">
+					<input type="text" ng-model="item.date">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn" ng-disabled="form.$invalid || form.$pristine">Išsaugoti</button>
+				</div>
+			</div>
+		</form>
+	</script>
+	<script src="inc/underscore/underscore.js"></script>
+	<script src="inc/jquery/jquery-1.8.2.min.js"></script>
+	<script src="inc/jquery-ui/jquery-ui-1.9.0.custom.min.js"></script>
+	<script src="inc/angular/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/catalog-ctrl.js"></script>
+	<script src="js/controllers/item-detail-ctrl.js"></script>
+	<script src="js/controllers/item-edit-ctrl.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<h3>Prekės peržiūra</h3>
+<div class="row">
+	<div class="span2">
+		<label>Pavadinimas</label>
+	</div>
+	<div class="span3"><strong>
+		{{item.title}}
+	</strong></div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label>Kaina</label>
+	</div>
+	<div class="span3"><strong>
+		{{item.price}} Lt<span ng-show="item.unit">/{{item.unit}}</span>
+	</strong></div>
+</div>
+<div class="row" ng-show="!!item.remainder">
+	<div class="span2">
+		<label>Likutis</label>
+	</div>
+	<div class="span3"><strong>
+		{{item.remainder}} {{item.unit}}
+	</strong></div>
+</div>
+<div class="row" ng-show="!!item.remainder">
+	<div class="span2">
+		<label>Suma</label>
+	</div>
+	<div class="span3"><strong>
+		{{item.remainder * item.price | number:2}} Lt
+	</strong></div>
+</div>
+<div class="row" ng-show="!!item.date">
+	<div class="span2">
+		<label>Galiojimo data</label>
+	</div>
+	<div class="span3"><strong>
+		{{item.date}}
+	</strong></div>
+</div>
+<a href="#catalog"><< Atgal</a> | <a href="#item/{{item.id}}">Redaguoti</a>
