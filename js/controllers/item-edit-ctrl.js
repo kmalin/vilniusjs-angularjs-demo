@@ -7,6 +7,6 @@ angular.module('catalog')
 	
 	$scope.doneEditing = function(item) {
 		catalogService[item.id ? 'save' : 'add'](item);
-		$location.path('catalog');
+		$location.path('/catalog');
 	}
 }]);

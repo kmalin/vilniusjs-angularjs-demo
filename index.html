@@ -11,7 +11,7 @@
 	<div class="navbar navbar-static-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<h2><a href="#index">Prekių katalogas</a></h2>
+				<h2><a href="#/index">Prekių katalogas</a></h2>
 			</div>
 		</div>
 	</div>
@@ -20,10 +20,10 @@
 			<div class="span3">
 				<ul class="nav nav-list">
 					<li class="nav-header">Pagrindinis</li>
-					<li><a href="#index">Pagrindinis</a></li>
+					<li><a href="#/index">Pagrindinis</a></li>
 					<li class="nav-header">Katalogas</li>
-					<li><a href="#catalog">Prekių sąrašas</a></li>
-					<li><a href="#item/new">Nauja prekė</a></li>
+					<li><a href="#/catalog">Prekių sąrašas</a></li>
+					<li><a href="#/item/new">Nauja prekė</a></li>
 				</ul>
 			</div>
 			<div class="span10 main-content">
@@ -35,7 +35,7 @@
 		<div class="hero-unit">
 		<h1>Prekių katalogas</h1>
 		<p>Sukurtas naudojant <strong>AngularJS</strong> karkasą</p>
-		<p><a class="btn btn-primary btn-large" href="#catalog">Pradėti</a></p>
+		<p><a class="btn btn-primary btn-large" href="#/catalog">Pradėti</a></p>
 		<p>
 			Naudojamos technologijos:
 			<ul class="inline">
@@ -51,8 +51,8 @@
 	<script type="text/ng-template" id="partials/catalog.html">
 		<h3>Prekių sąrašas</h3>
 		<ul class="left inline">
-			<li>Viso prekių: <a href="#catalog">{{pagedItems.length}}</a></li>
-			<li>Prekių, kurių galiojimo laikas baigėsi: <a href="#catalog/expired">{{expiredCount}}</a></li>
+			<li>Viso prekių: <a href="#/catalog">{{pagedItems.length}}</a></li>
+			<li>Prekių, kurių galiojimo laikas baigėsi: <a href="#/catalog/expired">{{expiredCount}}</a></li>
 		</ul>
 		<form class="form-search right">
 			<input type="text" class="input-medium search-query" ng-model="query">
@@ -72,18 +72,18 @@
 			</thead>
 			<tbody ng-repeat="item in pagedItems | expiredFilter | filter:query">
 				<tr>
-					<td><a href="#item/view/{{item.id}}">{{item.id}}</a></td>
-					<td><a href="#item/view/{{item.id}}">{{item.title}}</a></td>
+					<td><a href="#/item/view/{{item.id}}">{{item.id}}</a></td>
+					<td><a href="#/item/view/{{item.id}}">{{item.title}}</a></td>
 					<td>{{item.price}} Lt</td>
 					<td>{{item.remainder}} {{item.unit}}</td>
 					<td><span ng-show="item.remainder">{{item.remainder * item.price | number:2}} Lt</span></td>
 					<td ng-class="{expired: isExpired(item)}">{{item.date}}</td>
-					<td><a href="#item/{{item.id}}">Redaguoti</a></td>
+					<td><a href="#/item/{{item.id}}">Redaguoti</a></td>
 					<td><a ng-click="remove(item)">Ištrinti</a></td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="left"><a href="#item/new" class="btn">Nauja prekė</a></div>
+		<div class="left"><a href="#/item/new" class="btn">Nauja prekė</a></div>
 	</script>
 	<script type="text/ng-template" id="partials/item-edit.html">
 		<form name="form" ng-submit="doneEditing(item)" class="form-horizontal" novalidate>
