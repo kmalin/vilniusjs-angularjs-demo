@@ -221,3 +221,70 @@ angular.module('catalog')
     };
 }]);
 ```
+
+9. Direktyvos (Directives)
+--------------------------
+
+Direktyvos (arba komponentai) yra pagrindinis būdas, kaip AngularJS "bendrauja" su HTML DOM'u. Tai iš esmės yra funkcijos, kurios vienintelės gauna priėjimą ir prie DOM elementų ir prie konteksto. Šis priėjimas lokalizuojamas direktyvose, o kontroleriai ir servisai to negali daryti. Dauguma anksčiau matytų atributų (su ng- priedėliu) yra direktyvos:
+* ng-app
+* ng-model
+* ng-controller
+* ng-click
+* ng-repeat
+* ng-view
+* ng-show
+* ng-disabled
+* ...
+
+Įdomus dalykas, kad direktyvos gali būti aprašomos ne tik kaip atributai, bet taip pat kaip elementa, CSS klasės ar komentarai.
+
+Direktyvos pavyzdys:
+```js
+// Creating a module
+angular.module('companyDirectives', []);
+
+// Creating a directive
+angular.module('companyDirectives').directive('datePicker', [function () {
+	return {
+		priority: 0,
+		replace: false,
+		restrict: 'A', //restrict to attributes
+		scope: false,
+		require:'?ngModel',
+		compile: function compile() {
+			return function postLink(scope, element, attrs, controller) {
+				
+				var opts = { 
+					showOtherMonths: true,
+					selectOtherMonths: false,
+					changeMonth: true,
+					changeYear: true,
+					dateFormat: 'yy-mm-dd',
+					firstDay: 1
+				};
+				
+				if (controller) {
+					var updateModel = function () {
+						scope.$apply(function () {
+							var date = element.val();
+							element.datepicker("setDate", date);
+							controller.$setViewValue(date);
+						});
+					};
+					opts.onSelect = updateModel;
+					
+				}
+				
+				// If we don't destroy the old one it doesn't update properly when the config changes
+				element.datepicker('destroy');
+				// Create the new datepicker widget
+				element.datepicker(opts);
+			}
+		}
+	};
+}]);
+```
+
+Direktyvose susiduriame su tuo kaip atnaujinamas modelis iš "išorės". Kad modelis atsinaujintų, reikia iškviesti `scope.$apply()` funkciją.
+
+![Modelio būsenos atnaujinimas](http://docs.angularjs.org/img/guide/concepts-runtime.png)

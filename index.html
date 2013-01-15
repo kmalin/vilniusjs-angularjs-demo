@@ -123,7 +123,8 @@
 			<div class="control-group">
 				<label class="control-label">Galiojimo data</label>
 				<div class="controls">
-					<input type="text" ng-model="item.date">
+					<!--<input type="text" ng-model="item.date" date-picker>-->
+					<date-picker ng-model="item.date"></date-picker>
 				</div>
 			</div>
 			<div class="control-group">
@@ -137,6 +138,7 @@
 	<script src="inc/jquery/jquery-1.8.2.min.js"></script>
 	<script src="inc/jquery-ui/jquery-ui-1.9.0.custom.min.js"></script>
 	<script src="inc/angular/angular.min.js"></script>
+	<script src="js/directives/datepicker.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/services/expired-service.js"></script>
 	<script src="js/services/catalog-storage.js"></script>
