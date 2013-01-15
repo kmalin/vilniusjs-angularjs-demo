@@ -159,3 +159,37 @@ Paprastas kontrolerio pavyzdys:
 </body>
 </html>
 ```
+
+7. Servisai (Services)
+----------------------
+
+Reikia stengtis neapkrauti kontrolerių daugiau nei reikalauja biznio logika tam HTML vaizdui. Kitą, pvz duomenų gavimo ir saugojimo, logiką reikia iškelti į servisus.
+
+Paprasto serviso pavyzdys:
+```js
+angular.module('catalog')
+
+.factory( 'expiredService', [function() {
+
+	var today = new Date().toISOString().substr(0, 10);
+	
+	return function(item) {
+		return item.date && item.date < today;
+	}
+	
+}]);
+```
+
+AngularJS turi daug standartinių servisų: 
+* $location
+* $rout
+* $routeParams
+* $http
+* $log
+* $timeout
+* $window
+* $q
+* $resource
+* ...
+
+Kaip matome šie servisai užvelka abstrakcijos lygį ant standartinių JavaScript objektų, tam kad juos prireikus būtų galima pakeisti kitais (pvz. testuojant).
