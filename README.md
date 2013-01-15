@@ -288,3 +288,13 @@ angular.module('companyDirectives').directive('datePicker', [function () {
 Direktyvose susiduriame su tuo kaip atnaujinamas modelis iš "išorės". Kad modelis atsinaujintų, reikia iškviesti `scope.$apply()` funkciją.
 
 ![Modelio būsenos atnaujinimas](http://docs.angularjs.org/img/guide/concepts-runtime.png)
+
+10. Kiti karkaso aspektai
+-------------------------
+
+* Įvykiai - leidžia papildomai komunikuoti tarp direktyvų ir kontrolerių, kai komunikacija per modelį yra per sudėtinga.
+* $http ir $resource servisai - komunikacijai su serveriu.
+* Lokalizacija - karkasas turi pagrindus lokalizacijai, bet daugumoj reikia susikurti savo. 
+* Testavimas - DI įgalina lengvą testavimą.
+
+AngularJS yra didelis frameworkas ir turi savo rekomenduojamą būdą kaip kurti applikacijas. Tam tikrais atvejais tai gali būti per didelis karkasas reikiamai užduočiai, bet ten kur jis tinka, labai palengvina darbą.
