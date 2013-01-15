@@ -97,3 +97,32 @@ Pavyzdys:
 </form>
 </script>
 ```
+
+5. Formos (Forms)
+-----------------
+
+AngularJS turi savo būdą kaip validuoti formas. Karkasas palaiko standartinius HTML įvedimo elementus, ir automatiškai susaisto reikšmes kai yra nurodomas `ng-model` atributas.
+Pvz.:
+```html
+<input type="text" placeholder="Pavadinimas (iki 50 simb.)" ng-model="item.title">
+```
+
+Taip pat galima nurodyti papildomas validavimo roles, kaip: `text, number, url, email, radio, checkbox`. Kiekviena rolė dar gali turėti papildomus atributus, pvz.: `required, pattern, minlength, maxlength, min, max`.
+Tada pilnas aprašymas galėtų atrodyti taip:
+```html
+<input type="number" placeholder="Kaina litais" ng-model="item.price" required number min="0" max="1000000">
+```
+
+Vos tik kuriam nors formos elementui pakeičiama reikšmė, formos elementams ir pačiai formai priskiriamos šios css klasės:
+* ng-valid - Elemento reikšmė validi
+* ng-invalid - Element reikšmė nevalidi
+* ng-pristine - Elemento reikšmė nepakeista
+* ng-dirty - Elemento reikšmė pakeista
+
+Formą ir jos validavimo rezultatus galima matyti iš šablono arba kontrolerio jei nurodomas formos `name` atributas - `name="form"`. Tada pvz. šablone galima kontroliuoti formos patvirtinimo mygtuką.
+```html
+<button type="submit" class="btn" ng-disabled="form.$invalid || form.$pristine">Išsaugoti</button>
+```
+Formos nebus galima išsaugoti tol kol ji bus validi ar niekas nebus pakeista.
+
+Kai forma yra patvirtininama, šį įvykį galima sugauti ir iškviesti kontrolerio funkciją: `ng-submit="doneEditing(item)"`
