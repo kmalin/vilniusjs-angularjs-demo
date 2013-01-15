@@ -298,3 +298,13 @@ Direktyvose susiduriame su tuo kaip atnaujinamas modelis iš "išorės". Kad mod
 * Testavimas - DI įgalina lengvą testavimą.
 
 AngularJS yra didelis frameworkas ir turi savo rekomenduojamą būdą kaip kurti applikacijas. Tam tikrais atvejais tai gali būti per didelis karkasas reikiamai užduočiai, bet ten kur jis tinka, labai palengvina darbą.
+
+11. Nuorodos
+------------
+
+* [AngularJS](http://angularjs.org/)
+
+Sukurti puslapiai:
+* [Sveikas Pasauli!](http://kmalin.github.com/vilniusjs-angularjs-demo/hello.html)
+* [Kontrolerio pavysdys](http://kmalin.github.com/vilniusjs-angularjs-demo/simple-controller.html)
+* [Prekių katalogas](http://kmalin.github.com/vilniusjs-angularjs-demo)
