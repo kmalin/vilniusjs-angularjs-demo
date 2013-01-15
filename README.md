@@ -126,3 +126,36 @@ Formą ir jos validavimo rezultatus galima matyti iš šablono arba kontrolerio 
 Formos nebus galima išsaugoti tol kol ji bus validi ar niekas nebus pakeista.
 
 Kai forma yra patvirtininama, šį įvykį galima sugauti ir iškviesti kontrolerio funkciją: `ng-submit="doneEditing(item)"`
+
+6. Kontroleriai (Controllers)
+-----------------------------
+
+Galima įsivaizduoti, kad kontroleris "valdo" tam tikrą html fragmentą. Tiksliau AngularJS karkase, kontroleris keičia konteksto objektą ("scope", modelio atitikmuo pagal MVC) pridėdamas naujus properčius ar metodus.
+
+Paprastas kontrolerio pavyzdys:
+```html
+<!doctype html>
+<html ng-app>
+<head>
+	<link rel="stylesheet" href="inc/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="inc/angular/angular.min.js"></script>
+	<script type="text/javascript" >
+		function MathCtrl($scope) {
+			
+			$scope.calculate = function() {
+				$scope.result = $scope.x * $scope.x;
+			};
+			
+		}
+	</script>
+</head>
+<body>
+	<div class="container main-content" ng-controller="MathCtrl">
+		<input type="text" number ng-model="x" ><br/>
+		<button class="btn" ng-click="calculate()">Kelti kvadratu</button>
+		<p>Rezultatas: {{result}}</p>
+	</div>
+</body>
+</html>
+```
